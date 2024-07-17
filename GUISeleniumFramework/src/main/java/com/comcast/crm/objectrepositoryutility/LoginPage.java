@@ -56,7 +56,7 @@ public class LoginPage extends WebDriverUtility{                              //
 	 public void loginToapp(String url , String username , String password) {
 		 waitForPageToLoad(driver);
 		 driver.get(url);	
-		// driver.manage().window().maximize();
+		 driver.manage().window().maximize();
 		 usernameEdt.sendKeys(username);
 		 passwordEdt.sendKeys(password);
 		 loginBtn.click();

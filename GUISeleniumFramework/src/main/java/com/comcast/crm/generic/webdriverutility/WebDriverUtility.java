@@ -159,6 +159,10 @@ public class WebDriverUtility {
 	public void switchtoAlertAndCancel(WebDriver driver) {
 		driver.switchTo().alert().dismiss();
 	} 
+	
+	public void switchtoAlertAndsenddata(WebDriver driver,String stock) {
+		driver.switchTo().alert().sendKeys(stock);
+	}
 	/**
 	 * select the value from the dropDown based on visible text
 	 * @param element

@@ -9,44 +9,52 @@ import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+
 /**
  * 
- * @author Deepak
+ * @author supriya
  *
  */
 public class ExcelUtility {
-	
+
 	/**
 	 * read data from Excel based row and column index
+	 * 
 	 * @param sheetName
 	 * @param rowNum
 	 * @param celNum
 	 * @return
 	 * @throws Throwable
 	 */
-	public String getDataFromExcel(String sheetName , int rowNum , int celNum) throws Throwable {
-		
+	public String getDataFromExcel(String sheetName, int rowNum, int celNum) throws IOException {
+
 		FileInputStream fis = new FileInputStream("./testdata/testScriptdata.xlsx");
-		Workbook wb =  WorkbookFactory.create(fis);
-	    String data = wb.getSheet(sheetName).getRow(rowNum).getCell(celNum).getStringCellValue();
-	    wb.close();
+		Workbook wb = WorkbookFactory.create(fis);
+		String data = wb.getSheet(sheetName).getRow(rowNum).getCell(celNum).getStringCellValue();
+		wb.close();
 		return data;
+
 	}
+
 	/**
 	 * get the used row count based on sheet name
+	 * 
 	 * @param sheetName
 	 * @return
+	 * @throws Exception
 	 * @throws Throwable
 	 */
-	public int getRowcount(String sheetName ) throws Throwable {
+	public int getRowcount(String sheetName) throws Exception {
 		FileInputStream fis = new FileInputStream("./testdata/testScriptdata.xlsx");
-		Workbook wb =  WorkbookFactory.create(fis);
+		Workbook wb = WorkbookFactory.create(fis);
 		int rowCount = wb.getSheet(sheetName).getLastRowNum();
-		 wb.close();
+		wb.close();
 		return rowCount;
 	}
+
 	/**
 	 * write data back to excel based on cell index
+	 * 
 	 * @param sheetName
 	 * @param rowNum
 	 * @param celNum
@@ -54,17 +62,16 @@ public class ExcelUtility {
 	 * @throws EncryptedDocumentException
 	 * @throws IOException
 	 */
-	public void setDataIntoExcel(String sheetName , int rowNum , int celNum , String data) throws EncryptedDocumentException, IOException {
+	public void setDataIntoExcel(String sheetName, int rowNum, int celNum, String data) throws IOException {
 		FileInputStream fis = new FileInputStream("./testdata/testScriptdata.xlsx");
-		Workbook wb =  WorkbookFactory.create(fis);
+		Workbook wb = WorkbookFactory.create(fis);
 		wb.getSheet(sheetName).getRow(rowNum).createCell(celNum);
-		
+
 		FileOutputStream fos = new FileOutputStream("./testdata/testScriptdata.xlsx");
 		wb.write(fos);
 		wb.close();
-	} 
-	
-	
+	}
+
 	/**
 	 * This method is used to fetch the data from the excel based on key
 	 * 
@@ -75,9 +82,9 @@ public class ExcelUtility {
 	 * @throws EncryptedDocumentException
 	 */
 	public String getDataFromExcel(String excelPath, String sheetName, String testcaseName, String requiredKey)
-			throws EncryptedDocumentException, IOException {
+			throws Exception {
 		FileInputStream fis = new FileInputStream("./testdata/testScriptdata.xlsx");
-		Workbook wb =  WorkbookFactory.create(fis);
+		Workbook wb = WorkbookFactory.create(fis);
 		Sheet sheet = wb.getSheet(sheetName);
 		String value = "";
 		String actualTestCaseName = "";
@@ -112,11 +119,4 @@ public class ExcelUtility {
 		return value;
 	}
 
-
 }
-
-
-
-
-
-
